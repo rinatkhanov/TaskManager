@@ -1,32 +1,48 @@
-<%= form_with(model: task, local: true) do |form| %>
-  <% if task.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(task.errors.count, "error") %> prohibited this task from being saved:</h2>
+<%= form_for @task, :html => { :class => "form-horizontal task" } do |f| %>
 
-      <ul>
-      <% task.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+  <% if @task.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@task.errors.count, "error") %> prohibited this task from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @task.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :text %>
-    <%= form.text_area :text, id: :task_text %>
+  <div class="form-group">
+    <%= f.label :text, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :text, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:text) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :scheduled_at, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :scheduled_at, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:scheduled_at) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :done, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :done, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:done) %>
   </div>
 
-  <div class="field">
-    <%= form.label :scheduled_at %>
-    <%= form.date_select :scheduled_at, id: :task_scheduled_at %>
+  <div class="form-group">
+    <div class="col-lg-offset-2 col-lg-10">
+      <%= f.submit nil, :class => 'btn btn-primary' %>
+      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                tasks_path, :class => 'btn btn-default' %>
+    </div>
   </div>
 
-  <div class="field">
-    <%= form.label :done %>
-    <%= form.check_box :done, id: :task_done %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
 <% end %>
