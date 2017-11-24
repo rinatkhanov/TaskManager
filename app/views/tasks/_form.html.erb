@@ -20,21 +20,21 @@
     <div class="col-lg-10">
       <%= f.text_field :text, :class => 'form-control' %>
     </div>
-    <%=f.error_span(:text) %>
+
   </div>
   <div class="form-group">
     <%= f.label :scheduled_at, :class => 'control-label col-lg-2' %>
     <div class="col-lg-10">
-      <%= f.text_field :scheduled_at, :class => 'form-control' %>
+      <%= f.date_select :scheduled_at, id: :task_scheduled_at %>
     </div>
-    <%=f.error_span(:scheduled_at) %>
+
   </div>
   <div class="form-group">
     <%= f.label :done, :class => 'control-label col-lg-2' %>
     <div class="col-lg-10">
-      <%= f.text_field :done, :class => 'form-control' %>
+      <%= f.check_box :done, id: :task_done %>
     </div>
-    <%=f.error_span(:done) %>
+
   </div>
 
   <div class="form-group">
