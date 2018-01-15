@@ -1,0 +1,15 @@
+.text-center
+  = link_to 'New Project', new_project_path, :class => 'btn btn-primary'
+br
+br
+table
+  tbody
+    - @projects.each do |project|
+      tr.well style="width:1000px; display:block"
+        td
+            = link_to '', edit_project_path(project), :class => 'glyphicon glyphicon-pencil btn btn-default' 
+            = link_to '', project, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'glyphicon glyphicon-trash btn btn-default', :style => 'margin: 10px;'
+        td
+          a href= project_path(project)
+            h4
+              = project.name

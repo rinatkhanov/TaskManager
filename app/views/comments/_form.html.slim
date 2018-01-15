@@ -1,0 +1,16 @@
+= form_with(model: comment, local: true) do |form|
+  - if comment.errors.any?
+    #error_explanation
+      h2
+        = pluralize(comment.errors.count, "error")
+        |  prohibited this comment from being saved:
+      ul
+        - comment.errors.full_messages.each do |message|
+          li
+            = message
+  .field
+    = form.text_area :text, id: :comment_text, placeholder: 'Enter your comment here...', class: 'form-control'
+    = form.hidden_field :task_id, :value => @task.id
+  .actions
+  br
+    = form.submit class: 'btn btn-default'

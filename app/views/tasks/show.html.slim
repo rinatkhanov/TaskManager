@@ -1,0 +1,27 @@
+- model_class = Task
+
+
+dl.dl-horizontal
+  .well
+    h3
+      = @task.text
+    = @task.done ? 'Finished' : 'Not Finished'
+    | . Assigned to project: 
+    = @task.project&.name || 'None'
+    .text-right
+      dd
+        = @task.scheduled_at
+
+  = link_to '', edit_task_path(@task), :class => 'glyphicon glyphicon-pencil btn btn-default' 
+  = link_to '', @task, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'glyphicon glyphicon-trash btn btn-default'
+  br
+  br
+  = render 'comments/form', comment: Comment.new
+  br
+
+  - @task.comments.reverse.each do |comment|
+    .well.well-sm
+      h4
+        = comment.text
+      .text-right
+        = link_to '', comment, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'glyphicon glyphicon-trash btn btn-default'

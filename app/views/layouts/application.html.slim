@@ -1,0 +1,36 @@
+doctype html
+html
+  head
+    title
+      | TaskManager
+    = csrf_meta_tags
+    = stylesheet_link_tag    'application', media: 'all'
+    = javascript_include_tag 'application'
+  body
+    .container
+      .navbar.fixed-top.navbar-dark
+        .navbar-brand
+            h3 
+              a href="/" Task Manager
+              a href="/projects" class="btn btn-default" style="margin:20px" Projects    
+        .text-right
+          br
+          - if user_signed_in?
+            = current_user.token
+            br
+            = current_user.email
+            = link_to('Logout', destroy_user_session_path, method: :delete, :class => 'btn btn-default', :style => "margin:20px")
+          - else
+            = link_to('Login', new_user_session_path)
+            br
+            = link_to('Register', new_user_registration_path)
+
+      .row
+        .col-sm-10
+          br
+          h4
+            = notice
+          h4
+            = alert
+          br
+          = yield
